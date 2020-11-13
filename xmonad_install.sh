@@ -7,7 +7,7 @@ function connect2network() {
 }
 
 function configArchRepoMirror() {
-	echo "Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch" > /etc/pacman.d/mirrorlist
+	echo "Server = https://mirrors.ustc.edu.cn/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist
 	pacman -Syy
 }
 
@@ -39,7 +39,7 @@ function formatAndMountDisk() {
 
 # install base
 function createLinuxBase() {
-	pacstrap /mnt base linux linux-firmware vim
+	pacstrap /mnt base linux linux-firmware vim openssh
 }
 
 # gen fs table
