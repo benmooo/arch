@@ -1,4 +1,108 @@
-# install to usb stick
+############################## install to ssd ############################
+
+# 1. internet config 
+# wifi-menu iwctl
+timedatectl set-ntp true
+
+
+
+# 2. disks 
+# a partition
+lsblk
+fdisk /dev/sda    # g --> create a new GPT disklabel    n +512M  n +16G   n default w
+
+# b formate
+mkfs.ext4 /dev/sda3
+mkswap /dev/sda2
+swapon /dev/sda2
+
+# mount
+mount /dev/sda3 /mnt
+
+# 3. install 
+pacstrap /mnt base linux linux-firmware vim
+
+# 4. generate fs table
+genfstab -U /mnt >> /mnt/etc/fstab
+cat /mnt/etc/fstab
+
+# chane env from iso -> installation 
+arch-chroot /mnt
+
+# 5. change time zone 
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+hwclock --systohc
+
+# 6. locale settings
+# change locales
+sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
+locale-gen
+echo LANG=en_US.UTF-8 > /etc/locale.conf
+
+# 7. hostname settings
+echo alpha > /etc/hostname
+echo '
+127.0.0.1        localhost
+::1              localhost
+127.0.0.1        alpha
+' > /etc/hosts
+
+# 8. change root pwd
+passwd
+
+# 9. install boot loader: grub
+pacman -S grub efibootmgr networkmanager network-manager-applet mtools dosfstools wpa_supplicant wireless_tools openssh git base-devel linux-headers os-prober
+
+# 10. format efi partition 
+mkfs.fat -F32 /dev/sda1
+
+# 11. boot this partition to efi dir 
+mkdir /boot/efi
+mount /dev/sda1 /boot/efi
+
+# 12. install grub
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
+
+# 13. gen grub configuration file
+grub-mkconfig -o /boot/grub/grub.cfg
+
+# 14. enable services
+systemctl enable NetworkManager
+
+# 15. create sudo user
+useradd -mG wheel akatsuki
+passwd akatsuki
+# change wheel group 
+EDITOR=vim visudo  # %wheel ALL=(ALL) ALL
+
+# 16. exit & unmount & reboot
+exit && umount -a && reboot
+
+# 17. install pkgs
+# install graphic driver
+pacman -S xf86-video-vesa xf86-video-ati xf86-video-intel xf86-video-amdgpu xf86-video-nouveau
+# install desktop env
+pacman -S xorg sddm plasma kde-applications konsole chromium 
+# enable desktop manager
+systemctl enable sddm 
+
+# rebot 
+reboot
+
+# 18. customize
+
+
+
+
+
+
+
+
+
+
+
+
+################################  install to usb stick ###########################
 
 # boot up arch system
 
@@ -113,10 +217,8 @@ RuntimeMaxUse=30M
 
 # install graphic driver
 pacman -S xf86-video-vesa xf86-video-ati xf86-video-intel xf86-video-amdgpu xf86-video-nouveau
-
 # install desktop env
 pacman -S xorg sddm plasma konsole packagekit-qt5 chromium 
-
 # enable desktop manager
 systemctl enable sddm 
 

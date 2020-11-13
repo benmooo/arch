@@ -1,0 +1,92 @@
+{
+  "inbound": [
+    {
+      "localPort": 10808,
+      "protocol": "socks",
+      "udpEnabled": true,
+      "sniffingEnabled": true
+    }
+  ],
+  "logEnabled": false,
+  "loglevel": "warning",
+  "index": 1,
+  "vmess": [
+    {
+      "configVersion": 2,
+      "address": "c7s3.jamjams.net",
+      "port": 37760,
+      "id": "0fc866d6-937e-47be-80ef-61d46611ff1d",
+      "alterId": 0,
+      "security": "auto",
+      "network": "tcp",
+      "remarks": "LosAngeles_Node1",
+      "headerType": "none",
+      "requestHost": "",
+      "path": "",
+      "streamSecurity": "",
+      "allowInsecure": "False",
+      "configType": 1,
+      "testResult": " 296ms",
+      "subid": ""
+    },
+    {
+      "configVersion": 2,
+      "address": "c9s3.jamjams.net",
+      "port": 38650,
+      "id": "9bd75761-aac2-4d9c-816a-6653e753ddbf",
+      "alterId": 0,
+      "security": "auto",
+      "network": "tcp",
+      "remarks": "LosAngeles_Node2",
+      "headerType": "none",
+      "requestHost": "",
+      "path": "",
+      "streamSecurity": "",
+      "allowInsecure": "False",
+      "configType": 1,
+      "testResult": " 138ms",
+      "subid": ""
+    }
+  ],
+  "muxEnabled": true,
+  "domainStrategy": "IPIfNonMatch",
+  "routingMode": "0",
+  "useragent": [],
+  "userdirect": [],
+  "userblock": [],
+  "kcpItem": {
+    "mtu": 1350,
+    "tti": 50,
+    "uplinkCapacity": 12,
+    "downlinkCapacity": 100,
+    "congestion": false,
+    "readBufferSize": 2,
+    "writeBufferSize": 2
+  },
+  "listenerType": 2,
+  "speedTestUrl": "http://speedtest-sgp1.digitalocean.com/10mb.test",
+  "speedPingTestUrl": "https://www.google.com/generate_204",
+  "urlGFWList": "https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt",
+  "allowLANConn": false,
+  "enableStatistics": false,
+  "keepOlderDedupl": false,
+  "statisticsFreshRate": 2000,
+  "remoteDNS": "",
+  "defAllowInsecure": false,
+  "subItem": [],
+  "uiItem": {
+    "mainSize": "968, 681",
+    "mainLvColWidth": {
+      "def": 30,
+      "configType": 80,
+      "remarks": 100,
+      "address": 120,
+      "port": 50,
+      "security": 90,
+      "network": 70,
+      "subRemarks": 50,
+      "testResult": 70
+    }
+  },
+  "userPacRule": []
+}
