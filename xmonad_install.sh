@@ -136,9 +136,12 @@ function main() {
 	then
 		connect2network
 
-	elif [ $1 == "setupDisk" ]
+	elif [ $1 == "createDiskPartition" ]
 	then
 		createDiskPartition
+
+	elif [ $1 == "formatAndMountDisk" ]
+	then
 		formatAndMountDisk
 
 	elif [ $1 == "step1" ]

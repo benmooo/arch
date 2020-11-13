@@ -1,8 +1,11 @@
 conn:
 	./xmonad_install.sh conn
 
-setupDisk:
-	./xmonad_install.sh setupDisk
+createDiskPartition:
+	./xmonad_install.sh createDiskPartition
+
+formatAndMountDisk:
+	./xmonad_install.sh formatAndMountDisk
 
 step1:
 	./xmonad_install.sh step1
