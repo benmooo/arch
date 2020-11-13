@@ -123,10 +123,19 @@ function basicSetup() {
 
 # install xmonad
 function installXmonad() {
-	pacman -S xorg xorg-server xorg-xinit xmonad xmonad-contrib xterm
-	cp /etc/X11/xinit/xinitrc .xinitrc
-	vim .xinitrc
-	# exec xmonad
+	pacman -S xorg lightdm lightdm-gtk-greeter xmonad xmonad-contrib xmobar dmenu picom nitrogen chromium xterm
+	systemctl enable lightdm
+
+	# vim .xprofile
+}
+
+function installXmonad2() {
+	mkdir .xmonad
+	cd .xmonad
+	touch xmonad.hs
+	vim xmonad.hs
+	# 
+
 }
 
 
