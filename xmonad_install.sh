@@ -126,6 +126,7 @@ function installXmonad() {
 	pacman -S xorg xorg-server xorg-xinit xmonad xmonad-contrib xterm
 	cp /etc/X11/xinit/xinitrc .xinitrc
 	vim .xinitrc
+	# exec xmonad
 }
 
 
