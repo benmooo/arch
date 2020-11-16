@@ -107,7 +107,6 @@ function genGrubCfg() {
 # basic setup
 function basicSetup() {
 	systemctl enable NetworkManager
-
 	useradd -mG wheel akatsuki
 	passwd akatsuki
 	EDITOR=vim visudo  # %wheel ALL=(ALL) ALL
@@ -166,12 +165,17 @@ function main() {
 		setTimezone
 		setLocale
 		setHost
-		changeRootPwd
 		installBootLoader
 		installGrub
 		genGrubCfg
-		basicSetup
+		# changeRootPwd
+		# basicSetup
 		# exit && umount -a && reboot
+
+	elif [ $1 == "userSetup" ]
+	then
+		changeRootPwd
+		basicSetup
 
 	elif [ $1 == "step3" ]
 	then
