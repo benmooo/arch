@@ -177,6 +177,10 @@ function main() {
 		changeRootPwd
 		basicSetup
 
+	elif [ $1 == "archRepoMirror" ]
+	then
+		configArchRepoMirror
+
 	elif [ $1 == "step3" ]
 	then
 		installXmonad

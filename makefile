@@ -19,3 +19,6 @@ step3:
 fonts:
 	./install_fonts.sh
 
+archRepoMirror:
+	./xmonad_install.sh archRepoMirror
+
