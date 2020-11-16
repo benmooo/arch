@@ -16,3 +16,6 @@ step2:
 step3:
 	./xmonad_install.sh step3
 
+fonts:
+	./install_fonts.sh
+
