@@ -1,0 +1,168 @@
+;; -*-lisp-*-
+;;  ____ _____ 
+;; |  _ \_   _|  Derek Taylor (DistroTube)
+;; | | | || |  	 http://www.youtube.com/c/DistroTube
+;; | |_| || |  	 http://www.gitlab.com/dwt1/ 
+;; |____/ |_|  	
+;;        
+;; A customized config for stumpwm (https://stumpwm.github.io/)     
+;; Modified by Derek Taylor (http://www.gitlab.com/dwt1/)
+
+(in-package :stumpwm)
+
+;;; Startup Programs
+;;; Set Background
+(run-shell-command "nitrogen --restore")
+(run-shell-command "picom")
+(run-shell-command "xmodmap ~/.Xmodmap")
+
+(defun show-kernel ()
+  (let ((ip (run-shell-command "uname -r" t)))
+    (substitute #\Space #\Newline ip)))
+
+(defun show-hostname ()
+  (let ((host-name (run-shell-command "cat /etc/hostname" t)))
+    (substitute #\Space #\Newline host-name)))
+
+(defun show-package-count ()
+  (let ((host-name (run-shell-command "pacman -Q | wc -l" t)))
+    (substitute #\Space #\Newline host-name)))
+
+(defvar color1 "#ff92d0")
+(defvar color2 "#282a36")
+
+(setf
+ stumpwm:*mode-line-background-color* color2 
+ stumpwm:*mode-line-foreground-color* color1
+ stumpwm:*mode-line-border-color* "#333333"
+ stumpwm:*screen-mode-line-format* (list "%g | %v ^>^7 | " '(:eval (show-hostname)) "| " '(:eval (show-kernel)) "| " '(:eval (show-package-count)) "packages | %d ")
+ stumpwm:*mode-line-border-width* 1
+ stumpwm:*mode-line-pad-x* 6
+ stumpwm:*mode-line-pad-y* 1
+ stumpwm:*mode-line-timeout* 5
+ stumpwm:*mouse-focus-policy* :click
+ stumpwm:*group-format* "%n·%t"
+ stumpwm:*time-modeline-string* "%a, %b %d, %Y %l:%M%p"
+ stumpwm:*window-format* "^b^(:fg \"#9aedfe\")<%25t>"
+ stumpwm:*window-border-style* :tight
+ stumpwm:*normal-border-width* 1
+ )
+(stumpwm:set-focus-color "#7799CC")
+(stumpwm:grename "One")
+(stumpwm:gnewbg "Two")
+(stumpwm:gnewbg "Three")
+(stumpwm:gnewbg "Four")
+(stumpwm:gnewbg "Five")
+(stumpwm:gnewbg "Six")
+(stumpwm:gnewbg "Seven")
+(stumpwm:gnewbg "Eight")
+(stumpwm:toggle-mode-line (stumpwm:current-screen) (stumpwm:current-head))
+
+;; I change the prefix key to something else besides a keychord.
+;; The following three lines are a dirty hack to make SUPER the prefix key.
+;; This was originally (set-prefix-key (kbd "C-t"))
+(run-shell-command "xmodmap -e 'clear mod4'" t)
+(run-shell-command "xmodmap -e \'keycode 133 = F20\'" t)
+(set-prefix-key (kbd "F20"))
+
+;; prompt the user for an interactive command. The first arg is an
+;; optional initial contents.
+(defcommand colon1 (&optional (initial "")) (:rest)
+  (let ((cmd (read-one-line (current-screen) ": " :initial-input initial)))
+    (when cmd
+      (eval-command cmd t))))
+
+(define-key *root-map* (kbd "Q") "quit")
+(define-key *root-map* (kbd "R") "restart-hard")
+(define-key *root-map* (kbd "c") "command-mode")
+
+;; (define-key *root-map* (kbd "h") "move-focus left")
+;; (define-key *root-map* (kbd "j") "move-focus down")
+;; (define-key *root-map* (kbd "k") "move-focus up")
+;; (define-key *root-map* (kbd "l") "move-focus left")
+
+;; Interactive keymap activated by hitting the SUPER+backslash
+;; Then you can simply use h,j,k,l to move focus, or
+;; H,J,K,L to move windows. Esc will exit this keymap.
+(define-interactive-keymap imove-window nil
+  ((kbd "h") "move-focus left")
+  ((kbd "j") "move-focus down")
+  ((kbd "k") "move-focus up")
+  ((kbd "l") "move-focus right")
+  ((kbd "H") "move-window left")
+  ((kbd "J") "move-window down")
+  ((kbd "K") "move-window up")
+  ((kbd "L") "move-window right"))
+(define-key *top-map* (kbd "C-\\") "imove-window")
+
+(define-key *root-map* (kbd "C-m") "mode-line")
+;; Launch My Terminal (st)
+(define-key *root-map* (kbd "RET") "exec alacritty -e fish")
+(define-key *root-map* (kbd "C-c") "exec st") 
+;; Launch Emacs
+(define-key *root-map* (kbd "e") "exec emacsclient -c -a")
+;; Launch Dmenu
+(define-key *root-map* (kbd "d") "exec dmenu_run")
+;; My Dmenu Scripts
+(define-key *root-map* (kbd "C-E") "exec ./.dmenu/dmenu-edit-configs.sh")
+(define-key *root-map* (kbd "C-N") "exec ./.dmenu/dmenu-sysmon.sh")
+(define-key *root-map* (kbd "C-P") "exec passmenu")
+(define-key *root-map* (kbd "C-R") "exec ./.dmenu/dmenu-reddio.sh")
+(define-key *root-map* (kbd "C-S") "exec ./.dmenu/dmenu-surfraw.sh")
+(define-key *root-map* (kbd "C-T") "exec ./.dmenu/dmenu-trading.sh")
+;; Browse somewhere
+(define-key *root-map* (kbd "b") "colon1 exec firefox http://www.")
+;; Ssh somewhere
+(define-key *root-map* (kbd "C-s") "colon1 exec xterm -e ssh ")
+;; Lock screen
+(define-key *root-map* (kbd "C-l") "exec xlock")
+
+;; Web jump (works for Google and Imdb)
+(defmacro make-web-jump (name prefix)
+  `(defcommand ,(intern name) (search) ((:rest ,(concatenate 'string name " search: ")))
+    (substitute #\+ #\Space search)
+    (run-shell-command (concatenate 'string ,prefix search))))
+
+(make-web-jump "google" "firefox http://www.google.fr/search?q=")
+(make-web-jump "imdb" "firefox http://www.imdb.com/find?q=")
+
+;; C-t M-s is a terrble binding, but you get the idea.
+(define-key *root-map* (kbd "M-s") "google")
+(define-key *root-map* (kbd "i") "imdb")
+
+;; Message window font
+(set-font "-xos4-terminus-medium-r-normal--13-140-72-72-c-80-iso8859-14")
+
+;;; Define window placement policy...
+;; Clear rules
+(clear-window-placement-rules)
+
+;; Last rule to match takes precedence!
+;; TIP: if the argument to :title or :role begins with an ellipsis, a substring
+;; match is performed.
+;; TIP: if the :create flag is set then a missing group will be created and
+;; restored from *data-dir*/create file.
+;; TIP: if the :restore flag is set then group dump is restored even for an
+;; existing group using *data-dir*/restore file.
+(define-frame-preference "Default"
+  ;; frame raise lock (lock AND raise == jumpto)
+  (0 t nil :class "Konqueror" :role "...konqueror-mainwindow")
+  (1 t nil :class "XTerm"))
+
+(define-frame-preference "Ardour"
+  (0 t   t   :instance "ardour_editor" :type :normal)
+  (0 t   t   :title "Ardour - Session Control")
+  (0 nil nil :class "XTerm")
+  (1 t   nil :type :normal)
+  (1 t   t   :instance "ardour_mixer")
+  (2 t   t   :instance "jvmetro")
+  (1 t   t   :instance "qjackctl")
+  (3 t   t   :instance "qjackctl" :role "qjackctlMainForm"))
+
+(define-frame-preference "Shareland"
+  (0 t   nil :class "XTerm")
+  (1 nil t   :class "aMule"))
+
+(define-frame-preference "Emacs"
+  (1 t t :restore "emacs-editing-dump" :title "...xdvi")
+  (0 t t :create "emacs-dump" :class "Emacs"))

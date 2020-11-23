@@ -1,0 +1,4 @@
+tint2 &
+picom &
+nitrogen --restore &
+rofi -show run &

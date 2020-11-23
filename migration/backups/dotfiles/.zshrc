@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$HOME/go/bin:$HOME/.emacs.d/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/akatsuki/.oh-my-zsh"
@@ -8,12 +9,11 @@ export ZSH="/home/akatsuki/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#ZSH_THEME="spaceship"
 ZSH_THEME="spaceship"
 
 # Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME="spaceship"
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
@@ -34,7 +34,7 @@ ZSH_THEME="spaceship"
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -65,15 +65,11 @@ ZSH_THEME="spaceship"
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    git
-    zsh-autosuggestions 
-    zsh-syntax-highlighting
-)
+plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -102,24 +98,15 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias pc=proxychains
-#
-#
-# MODIFIED BT Akatsuki
-# add autojump
+alias pc="proxychains4 -q"
+alias vim="nvim"
+alias e="emacs"
+
+
+
+
+# enable auto jump
 [[ -s /home/akatsuki/.autojump/etc/profile.d/autojump.sh ]] && source /home/akatsuki/.autojump/etc/profile.d/autojump.sh
-autoload -U compinit && compinit -U
+autoload -U compinit && compinit -u
 
-# Initialize the promt system and choose pure
-# autoload -U promptinit; promptinit
-# prompt pure
-
-
-
-# source "/home/akatsuki/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
-
-source "/home/akatsuki/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
-
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
