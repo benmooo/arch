@@ -70,8 +70,9 @@ function config_lightdm() {
 }
 
 function load_dotfiles() {
-    cp -r .config $USER_HOME
-    cp -r .xmonad $USER_HOME
+    cp -r ./migration/backups/dotfiles/.config $USER_HOME
+    cp -r ./migration/backups/dotfiles/.xmonad $USER_HOME
+    cp -r ./migration/backups/dotfiles/.face $USER_HOME
 }
 
 
@@ -85,6 +86,9 @@ function main() {
     elif [[ $1 == "enableLightdm" ]]
     then
         enable_lightdm
+    elif [[ $1 == "loadDotfiles" ]]
+    then
+       load_dotfiles 
     elif [[ $1 == "setResolution" ]]
     then
         set_resolution
@@ -100,6 +104,7 @@ function main() {
         
         install_pkgs
         enable_lightdm
+        load_dotfiles
         # set_resolution
         config_lightdm
     fi
