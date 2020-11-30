@@ -56,7 +56,7 @@ function set_resolution() {
 # customize lightdm
 function config_lightdm() {
     # download lightdm theme
-    curl -vL -o ../glorious.tar.gz https://github.com/manilarome/lightdm-webkit2-theme-glorious/releases/download/v2.0.5/lightdm-webkit2-theme-glorious-2.0.5.tar.gz
+    curl -L -o ../glorious.tar.gz https://github.com/manilarome/lightdm-webkit2-theme-glorious/releases/download/v2.0.5/lightdm-webkit2-theme-glorious-2.0.5.tar.gz
     # extract 
     tar -C ../glorious -xzvf ../glorious.tar.gz
     # move
