@@ -1,24 +1,45 @@
-conn:
-	./xmonad_install.sh conn
+all:
+	./x_install.sh all
 
-createDiskPartition:
-	./xmonad_install.sh createDiskPartition
+chkPrerequisites:
+	./x_install.sh chkPrerequisites
 
-formatAndMountDisk:
-	./xmonad_install.sh formatAndMountDisk
+installPkgs:
+	./x_install.sh installPkgs
 
-step1:
-	./xmonad_install.sh step1
+enableLightdm:
+	./x_install.sh enableLightdm
 
-step2:
-	./xmonad_install.sh step2
+setResolution:
+	./x_install.sh setResolution
 
-step3:
-	./xmonad_install.sh step3
+configLightdm:
+	./x_install.sh configLightdm
 
-fonts:
-	./install_fonts.sh
 
-archRepoMirror:
-	./xmonad_install.sh archRepoMirror
+
+
+# conn:
+# 	./xmonad_install.sh conn
+# 
+# createDiskPartition:
+# 	./xmonad_install.sh createDiskPartition
+# 
+# formatAndMountDisk:
+# 	./xmonad_install.sh formatAndMountDisk
+# 
+# step1:
+# 	./xmonad_install.sh step1
+# 
+# step2:
+# 	./xmonad_install.sh step2
+# 
+# step3:
+# 	./xmonad_install.sh step3
+# 
+# fonts:
+# 	./install_fonts.sh
+# 
+# archRepoMirror:
+# 	./xmonad_install.sh archRepoMirror
 

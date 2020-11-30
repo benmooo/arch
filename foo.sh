@@ -1,0 +1,2 @@
+user=`whoami`
+echo $user

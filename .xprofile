@@ -1,5 +1,0 @@
-# wallpaper
-nitrogen --restore &
-
-# compsitor
-picom -f &
