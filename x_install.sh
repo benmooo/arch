@@ -2,7 +2,7 @@
 
 USER_HOME=/home/$(whoami)
 
-function _configline {
+function configline() {
   local OLD_LINE_PATTERN=$1; shift
   local NEW_LINE=$1; shift
   local FILE=$1
@@ -48,7 +48,7 @@ function enable_lightdm() {
 # set virtual machine resolution when booting lightdm
 function set_resolution() {
     # lightdm init script
-    sudo sh _configline '#display-setup-script=' 'display-setup-script=xrandr --mode 1920x1080' /etc/lightdm/lightdm.conf
+    sudo configline '#display-setup-script=' 'display-setup-script=xrandr --mode 1920x1080' /etc/lightdm/lightdm.conf
 }
 
 
@@ -64,9 +64,9 @@ function config_lightdm() {
     rm -rf ../glorious  ../glorious.tar.gz
 
     # set lightdm greeter session to webkit2
-    sudo sh _configline '#greeter-session=.*' 'greeter-session=lightdm-webkit2-greeter' /etc/lightdm/lightdm.conf
-    sudo sh _configline 'webkit_theme.*' 'webkit_theme = glorious'
-    sudo sh _configline 'debug_mode.*' 'debug_mode = true'
+    sudo configline '#greeter-session=.*' 'greeter-session=lightdm-webkit2-greeter' /etc/lightdm/lightdm.conf
+    sudo configline 'webkit_theme.*' 'webkit_theme = glorious'
+    sudo configline 'debug_mode.*' 'debug_mode = true'
 }
 
 function load_dotfiles() {
