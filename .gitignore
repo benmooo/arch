@@ -50,3 +50,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# nvim pkgs
+migration/backups/dotfiles/.config/nvim/plugged
+migration/backups/dotfiles/.config/nvim/autoload
+migration/backups/dotfiles/.config/nvim/bundle
+migration/backups/dotfiles/.config/nvim/session

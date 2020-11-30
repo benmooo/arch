@@ -1,0 +1,4 @@
+patch:
+    schema_list:
+        - schema: terra_pinyin
+    menu/page_size: 7

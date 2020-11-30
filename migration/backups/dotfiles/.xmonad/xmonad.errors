@@ -1,6 +1,6 @@
 
 xmonad.hs:113:1: warning: [-Wtabs]
-    Tab character found here, and in one further location.
+    Tab character found here, and in three further locations.
     Please use spaces instead.
     |
 113 |           -- enable touchpad tap

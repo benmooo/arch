@@ -83,7 +83,7 @@ myModMask :: KeyMask
 myModMask = mod4Mask       -- Sets modkey to super/windows key
 
 myTerminal :: String
-myTerminal = "alacritty"   -- Sets default terminal
+myTerminal = "termite"   -- Sets default terminal
 
 myBrowser :: String
 myBrowser = "chromium "
@@ -111,9 +111,10 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 myStartupHook :: X ()
 myStartupHook = do
 	  -- enable touchpad tap
-          spawnOnce "xinput set-prop 13 313 1 &"
-	  -- start sslocal server
-          spawnOnce "/home/akatsuki/.local/bin/sslocal -c /home/akatsuki/.config/shadowsocks/ss.json &"
+        -- spawnOnce "xinput set-prop 13 313 1 &"
+	  -- start ibus daemon
+          spawnOnce "ibus-daemon -drx &"
+	  -- start nitrogen
           spawnOnce "nitrogen --restore &"
           spawnOnce "picom &"
           spawnOnce "nm-applet &"

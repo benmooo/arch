@@ -9,7 +9,7 @@ allow_bold = true
 #audible_bell = false
 clickable_url = true
 #dynamic_title = true
-font = Roboto Mono 12
+font = Roboto Mono Light 12
 #fullscreen = true
 geometry = 700x520
 icon_name = terminal
@@ -54,7 +54,7 @@ foreground = #bbc5ff
 foreground_bold = #bbc5ff
 cursor = #bbc5ff
 # background transparency (requires a compositor)
-background = rgba(40, 42, 54, 0.95)
+background = rgba(40, 42, 54, 0.90)
 
 # if unset, will reverse foreground and background
 #highlight = #839496

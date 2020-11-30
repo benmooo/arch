@@ -1,0 +1,8 @@
+__patch:
+# Rx: RimeOnion/themes:apply:theme=mritd {
+  - patch/+:
+      preset_color_schemes/mritd:
+        __include: themes/mritd.theme:/color_scheme_mritd
+      style/+:
+        __include: themes/mritd.theme:/style_override_
+# }

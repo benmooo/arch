@@ -22,12 +22,14 @@ call plug#begin('~/.vim/plugged')
     Plug 'frazrepo/vim-rainbow'
 "{{ File management }}
     Plug 'vifm/vifm.vim'                               " Vifm
-    Plug 'scrooloose/nerdtree'                         " Nerdtree
+    Plug 'preservim/nerdtree'
     Plug 'tiagofumo/vim-nerdtree-syntax-highlight'     " Highlighting Nerdtree
     Plug 'ryanoasis/vim-devicons'                      " Icons for Nerdtree
 "{{ Productivity }}
     Plug 'vimwiki/vimwiki'                             " VimWiki 
     Plug 'jreybert/vimagit'                            " Magit-like plugin for vim
+"{{ Auto-pair brackets }}
+    Plug 'jiangmiao/auto-pairs'
 "{{ Tim Pope Plugins }}
     Plug 'tpope/vim-surround'                          " Change surrounding marks
 "{{ Syntax Highlighting and Colors }}
@@ -38,7 +40,6 @@ call plug#begin('~/.vim/plugged')
 "{{ Junegunn Choi Plugins }}
     Plug 'junegunn/goyo.vim'                           " Distraction-free viewing
     Plug 'junegunn/limelight.vim'                      " Hyperfocus on a range
-    Plug 'junegunn/vim-emoji'                          " Vim needs emojis!
 
 call plug#end()
 
@@ -214,6 +215,35 @@ map <Leader>tk <C-w>t<C-w>K
 
 " Removes pipes | that act as seperators on splits
 set fillchars+=vert:\ 
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Limelight color schema
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Color name (:help cterm-colors) or ANSI code
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+
+" Color name (:help gui-colors) or RGB color
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_conceal_guifg = '#777777'
+
+" Default: 0.5
+let g:limelight_default_coefficient = 0.7
+
+" Number of preceding/following paragraphs to include (default: 0)
+let g:limelight_paragraph_span = 1
+
+" Beginning/end of paragraph
+"   When there's no empty line between the paragraphs
+"   and each paragraph starts with indentation
+let g:limelight_bop = '^\s'
+let g:limelight_eop = '\ze\n^\s'
+
+" Highlighting priority (default: 10)
+"   Set it to -1 not to overrule hlsearch
+let g:limelight_priority = -1
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Other Stuff
