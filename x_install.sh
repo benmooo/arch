@@ -49,14 +49,14 @@ function enable_lightdm() {
 # set virtual machine resolution when booting lightdm
 function set_resolution() {
     # lightdm init script
-    sudo bash -c "$FUNC; configline '#display-setup-script=' 'display-setup-script=xrandr --mode 1920x1080' /etc/lightdm/lightdm.conf"
+    sudo bash -c "$FUNC; configline '*.display-setup-script=' 'display-setup-script=xrandr --mode 1920x1080' /etc/lightdm/lightdm.conf"
 }
 
 
 # customize lightdm
 function config_lightdm() {
     # download lightdm theme
-    curl -L -o ../glorious.tar.gz https://github.com/manilarome/lightdm-webkit2-theme-glorious/releases/download/v2.0.5/lightdm-webkit2-theme-glorious-2.0.5.tar.gz
+    curl -vL -o ../glorious.tar.gz https://github.com/manilarome/lightdm-webkit2-theme-glorious/releases/download/v2.0.5/lightdm-webkit2-theme-glorious-2.0.5.tar.gz
     # extract 
     tar -C ../glorious -xzvf ../glorious.tar.gz
     # move
@@ -65,7 +65,7 @@ function config_lightdm() {
     rm -rf ../glorious  ../glorious.tar.gz
 
     # set lightdm greeter session to webkit2
-    sudo bash -c "$FUNC; configline '#greeter-session=.*' 'greeter-session=lightdm-webkit2-greeter' /etc/lightdm/lightdm.conf"
+    sudo bash -c "$FUNC; configline '.*greeter-session=.*' 'greeter-session=lightdm-webkit2-greeter' /etc/lightdm/lightdm.conf"
     sudo bash -c "$FUNC; configline 'webkit_theme.*' 'webkit_theme = glorious'"
     sudo bash -c "$FUNC; configline 'debug_mode.*' 'debug_mode = true'"
 }
