@@ -14,6 +14,7 @@ function configline() {
     echo "${NEW_LINE}" >> "${FILE}"
   fi
 }
+FUNC=$(declare -f configline)
 
 # check prerequisites
 function chk_prerequisites() {
@@ -48,7 +49,7 @@ function enable_lightdm() {
 # set virtual machine resolution when booting lightdm
 function set_resolution() {
     # lightdm init script
-    configline '#display-setup-script=' 'display-setup-script=xrandr --mode 1920x1080' /etc/lightdm/lightdm.conf
+    sudo bash -c "$FUNC; configline '#display-setup-script=' 'display-setup-script=xrandr --mode 1920x1080' /etc/lightdm/lightdm.conf"
 }
 
 
@@ -64,9 +65,9 @@ function config_lightdm() {
     rm -rf ../glorious  ../glorious.tar.gz
 
     # set lightdm greeter session to webkit2
-    configline '#greeter-session=.*' 'greeter-session=lightdm-webkit2-greeter' /etc/lightdm/lightdm.conf
-    configline 'webkit_theme.*' 'webkit_theme = glorious'
-    configline 'debug_mode.*' 'debug_mode = true'
+    sudo bash -c "$FUNC; configline '#greeter-session=.*' 'greeter-session=lightdm-webkit2-greeter' /etc/lightdm/lightdm.conf"
+    sudo bash -c "$FUNC; configline 'webkit_theme.*' 'webkit_theme = glorious'"
+    sudo bash -c "$FUNC; configline 'debug_mode.*' 'debug_mode = true'"
 }
 
 function load_dotfiles() {
