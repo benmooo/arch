@@ -58,6 +58,7 @@ function config_lightdm() {
     # download lightdm theme
     curl -L -o ../glorious.tar.gz https://github.com/manilarome/lightdm-webkit2-theme-glorious/releases/download/v2.0.5/lightdm-webkit2-theme-glorious-2.0.5.tar.gz
     # extract 
+    mkdir ../glorious
     tar -C ../glorious -xzvf ../glorious.tar.gz
     # move
     sudo cp -r ../glorious /usr/share/lightdm-webkit/themes/glorious
