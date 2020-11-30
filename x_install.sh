@@ -48,7 +48,7 @@ function enable_lightdm() {
 # set virtual machine resolution when booting lightdm
 function set_resolution() {
     # lightdm init script
-    sudo configline '#display-setup-script=' 'display-setup-script=xrandr --mode 1920x1080' /etc/lightdm/lightdm.conf
+    configline '#display-setup-script=' 'display-setup-script=xrandr --mode 1920x1080' /etc/lightdm/lightdm.conf
 }
 
 
@@ -64,9 +64,9 @@ function config_lightdm() {
     rm -rf ../glorious  ../glorious.tar.gz
 
     # set lightdm greeter session to webkit2
-    sudo configline '#greeter-session=.*' 'greeter-session=lightdm-webkit2-greeter' /etc/lightdm/lightdm.conf
-    sudo configline 'webkit_theme.*' 'webkit_theme = glorious'
-    sudo configline 'debug_mode.*' 'debug_mode = true'
+    configline '#greeter-session=.*' 'greeter-session=lightdm-webkit2-greeter' /etc/lightdm/lightdm.conf
+    configline 'webkit_theme.*' 'webkit_theme = glorious'
+    configline 'debug_mode.*' 'debug_mode = true'
 }
 
 function load_dotfiles() {
