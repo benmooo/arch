@@ -75,6 +75,8 @@ function load_dotfiles() {
     cp -r ./migration/backups/dotfiles/.config $USER_HOME
     cp -r ./migration/backups/dotfiles/.xmonad $USER_HOME
     cp -r ./migration/backups/dotfiles/.face $USER_HOME
+    username=$(whoami)
+    sed -i -e "s/akatsuki/${username}/g" ../.xmonad/xmonad.hs
 }
 
 
