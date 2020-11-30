@@ -38,7 +38,7 @@ function install_pkgs() {
     sudo pacman -S ttf-roboto ttf-roboto-mono noto-fonts-cjk ttf-dejavu otf-font-awesome
 
     # pkgs
-	sudo pacman -S xorg lightdm lightdm-webkit2-greeter xmonad xmonad-contrib xmobar dmenu picom nitrogen termite 
+	sudo pacman -S xorg-server xorg-xrandr lightdm lightdm-webkit2-greeter xmonad xmonad-contrib xmobar dmenu picom nitrogen termite 
 }
 
 function enable_lightdm() {
@@ -56,14 +56,14 @@ function set_resolution() {
 # customize lightdm
 function config_lightdm() {
     # download lightdm theme
-    #curl -L -o ../glorious.tar.gz https://github.com/manilarome/lightdm-webkit2-theme-glorious/releases/download/v2.0.5/lightdm-webkit2-theme-glorious-2.0.5.tar.gz
-    ## extract 
-    #mkdir ../glorious
-    #tar -C ../glorious -xzvf ../glorious.tar.gz
-    ## move
-    #sudo cp -r ../glorious /usr/share/lightdm-webkit/themes/glorious
-    ## clean
-    #rm -rf ../glorious  ../glorious.tar.gz
+    curl -L -o ../glorious.tar.gz https://github.com/manilarome/lightdm-webkit2-theme-glorious/releases/download/v2.0.5/lightdm-webkit2-theme-glorious-2.0.5.tar.gz
+    # extract 
+    mkdir ../glorious
+    tar -C ../glorious -xzvf ../glorious.tar.gz
+    # move
+    sudo cp -r ../glorious /usr/share/lightdm-webkit/themes/glorious
+    # clean
+    rm -rf ../glorious  ../glorious.tar.gz
 
     # set lightdm greeter session to webkit2
     sudo bash -c "$FUNC; configline '.*greeter-session=.*' 'greeter-session=lightdm-webkit2-greeter' /etc/lightdm/lightdm.conf"
