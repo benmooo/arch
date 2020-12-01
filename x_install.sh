@@ -61,7 +61,7 @@ function set_greeter() {
 function download_glorious() {
     # download lightdm theme
     # curl -L -o ../glorious.tar.gz https://github.com/manilarome/lightdm-webkit2-theme-glorious/releases/download/v2.0.5/lightdm-webkit2-theme-glorious-2.0.5.tar.gz
-    git clone akatsuki@192.168.0.101:/home/akatsuki/source/repos/archive/arch --depth=1
+    scp akatsuki@192.168.0.101:/home/akatsuki/Downloads/lightdm* .
 }
 
 
