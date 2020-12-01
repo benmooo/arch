@@ -34,6 +34,10 @@ function chk_prerequisites() {
 
 # install pkgs
 function install_pkgs() {
+    echo "##############################################"
+    echo "# Syncing aur.....                            "
+    echo "##############################################"
+    sudo pacman -Syy
     # fonts
     echo "##############################################"
     echo "# Installing fonts...                         "
