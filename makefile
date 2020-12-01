@@ -10,8 +10,8 @@ installPkgs:
 enableLightdm:
 	./x_install.sh enableLightdm
 
-loadDotfiles:
-	./x_install.sh loadDotfiles
+populateDotfiles:
+	./x_install.sh populateDotfiles
 
 setResolution:
 	./x_install.sh setResolution

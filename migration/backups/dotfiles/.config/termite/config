@@ -54,7 +54,7 @@ foreground = #bbc5ff
 foreground_bold = #bbc5ff
 cursor = #bbc5ff
 # background transparency (requires a compositor)
-background = rgba(40, 42, 54, 0.90)
+background = rgba(40, 42, 54, 0.85)
 
 # if unset, will reverse foreground and background
 #highlight = #839496

@@ -36,7 +36,6 @@ function chk_prerequisites() {
 function install_pkgs() {
     # fonts
     sudo pacman -S ttf-roboto ttf-roboto-mono noto-fonts-cjk ttf-dejavu otf-font-awesome
-
     # pkgs
 	sudo pacman -S xorg-server xorg-xrandr lightdm lightdm-webkit2-greeter xmonad xmonad-contrib xmobar dmenu picom nitrogen termite 
 }
@@ -49,14 +48,20 @@ function enable_lightdm() {
 # set virtual machine resolution when booting lightdm
 function set_resolution() {
     # lightdm init script
-    sudo bash -c "$FUNC; configline '*.display-setup-script=' 'display-setup-script=xrandr --mode 1920x1080' /etc/lightdm/lightdm.conf"
+    sudo bash -c "$FUNC; configline '.*display-setup-script=' 'display-setup-script=xrandr --output VGA-1 --mode 1920x1080' /etc/lightdm/lightdm.conf"
+}
+
+
+# download glorious theme
+function download_glorious() {
+    # download lightdm theme
+    curl -L -o ../glorious.tar.gz https://github.com/manilarome/lightdm-webkit2-theme-glorious/releases/download/v2.0.5/lightdm-webkit2-theme-glorious-2.0.5.tar.gz
 }
 
 
 # customize lightdm
 function config_lightdm() {
-    # download lightdm theme
-    curl -L -o ../glorious.tar.gz https://github.com/manilarome/lightdm-webkit2-theme-glorious/releases/download/v2.0.5/lightdm-webkit2-theme-glorious-2.0.5.tar.gz
+    download_glorious
     # extract 
     mkdir ../glorious
     tar -C ../glorious -xzvf ../glorious.tar.gz
@@ -71,12 +76,13 @@ function config_lightdm() {
     sudo bash -c "$FUNC; configline 'debug_mode.*' 'debug_mode = true' /etc/lightdm/lightdm-webkit2-greeter.conf"
 }
 
-function load_dotfiles() {
+function populate_dotfiles() {
     cp -r ./migration/backups/dotfiles/.config $USER_HOME
     cp -r ./migration/backups/dotfiles/.xmonad $USER_HOME
     cp -r ./migration/backups/dotfiles/.face $USER_HOME
     username=$(whoami)
     sed -i -e "s/akatsuki/${username}/g" ../.xmonad/xmonad.hs
+    sed -i -e "s/akatsuki/${username}/g" ../.config/picom/picom.conf
 }
 
 
@@ -90,9 +96,9 @@ function main() {
     elif [[ $1 == "enableLightdm" ]]
     then
         enable_lightdm
-    elif [[ $1 == "loadDotfiles" ]]
+    elif [[ $1 == "populateDotfiles" ]]
     then
-       load_dotfiles 
+       populate_dotfiles 
     elif [[ $1 == "setResolution" ]]
     then
         set_resolution
@@ -108,7 +114,7 @@ function main() {
         
         install_pkgs
         enable_lightdm
-        load_dotfiles
+        populate_dotfiles
         # set_resolution
         config_lightdm
     fi

@@ -110,18 +110,10 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 
 myStartupHook :: X ()
 myStartupHook = do
-	  -- enable touchpad tap
-        -- spawnOnce "xinput set-prop 13 313 1 &"
-	  -- start ibus daemon
-          spawnOnce "ibus-daemon -drx &"
 	  -- start nitrogen
           spawnOnce "nitrogen --restore &"
           spawnOnce "picom &"
           spawnOnce "nm-applet &"
-          -- spawnOnce "volumeicon &"
-          -- spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x282c34  --height 22 &"
-          spawnOnce "/usr/bin/emacs --daemon &"
-          -- spawnOnce "kak -d -s mysession &"
           setWMName "LG3D"
 
 myColorizer :: Window -> Bool -> X (String, String)

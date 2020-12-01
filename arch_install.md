@@ -58,6 +58,7 @@ hwclock --systohc
 echo -e "en_US.UTF-8 UTF-8\n" >> /etc/locale.gen
 echo -e "zh_CN.UTF-8 UTF-8\n" >> /etc/locale.gen
 locale-gen
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
 
 ### set the hostname
 echo archvbox > /etc/hostname
