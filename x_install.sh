@@ -102,8 +102,8 @@ function set_greeter_theme() {
     echo "##############################################"
     echo "# Set glorious as the theme of webkit2....    "
     echo "##############################################"
-    sudo bash -c "$FUNC; configline 'webkit_theme.*' 'webkit_theme = glorious' /etc/lightdm/lightdm-webkit2-greeter.conf"
-    sudo bash -c "$FUNC; configline 'debug_mode.*' 'debug_mode = true' /etc/lightdm/lightdm-webkit2-greeter.conf"
+    sudo bash -c "$FUNC; configline '^webkit_theme.*' 'webkit_theme = glorious' /etc/lightdm/lightdm-webkit2-greeter.conf"
+    sudo bash -c "$FUNC; configline '^debug_mode.*' 'debug_mode = true' /etc/lightdm/lightdm-webkit2-greeter.conf"
 }
 
 function populate_dotfiles() {
