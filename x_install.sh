@@ -35,12 +35,21 @@ function chk_prerequisites() {
 # install pkgs
 function install_pkgs() {
     # fonts
+    echo "##############################################"
+    echo "# Installing fonts...                         "
+    echo "##############################################"
     sudo pacman -S ttf-roboto ttf-roboto-mono noto-fonts-cjk ttf-dejavu otf-font-awesome
     # pkgs
+    echo "##############################################"
+    echo "# Installing packages..                       "
+    echo "##############################################"
 	sudo pacman -S xorg-server xorg-xrandr lightdm lightdm-webkit2-greeter xmonad xmonad-contrib xmobar dmenu picom nitrogen termite rofi
 }
 
 function enable_lightdm() {
+    echo "##############################################"
+    echo "# Enable lightdm.                             "
+    echo "##############################################"
 	sudo systemctl enable lightdm
 }
 
@@ -48,11 +57,17 @@ function enable_lightdm() {
 # set virtual machine resolution when booting lightdm
 function set_resolution() {
     # lightdm init script
+    echo "##############################################"
+    echo "# Set virtualbox resolution                   "
+    echo "##############################################"
     sudo bash -c "$FUNC; configline '.*display-setup-script=' 'display-setup-script=xrandr --output VGA-1 --mode 1920x1080' /etc/lightdm/lightdm.conf"
 }
 
 # set greeter to webkit2
 function set_greeter() {
+    echo "##############################################"
+    echo "# Set webkit2 as the greeter for lightdm..    "
+    echo "##############################################"
     sudo bash -c "$FUNC; configline '.*greeter-session=.*' 'greeter-session=lightdm-webkit2-greeter' /etc/lightdm/lightdm.conf"
 }
 
@@ -67,7 +82,10 @@ function download_glorious() {
 
 # customize lightdm
 function set_greeter_theme() {
-    echo "Retriving glorious theme which is a webkit2-greeter theme for lightdm ..."
+    echo "###############################################################################"
+    echo "# Retriving glorious theme which is a webkit2-greeter theme for lightdm ...    "
+    echo "###############################################################################"
+    echo ""
     download_glorious
     # extract 
     mkdir ../glorious
@@ -77,11 +95,17 @@ function set_greeter_theme() {
     # clean
     rm -rf ../glorious  ../glorious.tar.gz
 
+    echo "##############################################"
+    echo "# Set glorious as the theme of webkit2....    "
+    echo "##############################################"
     sudo bash -c "$FUNC; configline 'webkit_theme.*' 'webkit_theme = glorious' /etc/lightdm/lightdm-webkit2-greeter.conf"
     sudo bash -c "$FUNC; configline 'debug_mode.*' 'debug_mode = true' /etc/lightdm/lightdm-webkit2-greeter.conf"
 }
 
 function populate_dotfiles() {
+    echo "##############################################"
+    echo "# Populating configuation dotfiles...         "
+    echo "##############################################"
     cp -r ./migration/backups/dotfiles/.config $USER_HOME
     cp -r ./migration/backups/dotfiles/.xmonad $USER_HOME
     cp -r ./migration/backups/dotfiles/.face $USER_HOME
