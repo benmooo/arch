@@ -66,7 +66,7 @@ function download_glorious() {
 
 
 # customize lightdm
-function config_lightdm() {
+function set_greeter_theme() {
     echo "Retriving glorious theme which is a webkit2-greeter theme for lightdm ..."
     download_glorious
     # extract 
@@ -110,21 +110,21 @@ function main() {
     elif [[ $1 == "setResolution" ]]
     then
         set_resolution
-    elif [[ $1 == "configLightdm" ]]
+    elif [[ $1 == "setGreeterTheme" ]]
     then
-        config_lightdm
+        set_greeter_theme
     elif [[ $1 == "all" ]]
     then
         chk_prerequisites
         if [ $? -ne 0 ]; then
             return 1
         fi
-        
         install_pkgs
         enable_lightdm
+        set_greeter
+        set_greeter_theme
+        set_resolution
         populate_dotfiles
-        # set_resolution
-        config_lightdm
     fi
 }
 

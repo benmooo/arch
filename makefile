@@ -13,6 +13,9 @@ enableLightdm:
 setGreeter:
 	./x_install.sh setGreeter
 
+setGreeterTheme:
+	./x_install.sh setGreeterTheme
+
 setResolution:
 	./x_install.sh setResolution
 
