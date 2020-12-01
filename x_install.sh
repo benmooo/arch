@@ -53,14 +53,15 @@ function set_resolution() {
 
 # set greeter to webkit2
 function set_greeter() {
-    sudo bash -c "$FUNC; configline '.*greeter-session=' 'greeter-session=lightdm-webkit2-greeter' /etc/lightdm/lightdm.conf"
+    sudo bash -c "$FUNC; configline '.*greeter-session=.*' 'greeter-session=lightdm-webkit2-greeter' /etc/lightdm/lightdm.conf"
 }
 
 
 # download glorious theme
 function download_glorious() {
     # download lightdm theme
-    curl -L -o ../glorious.tar.gz https://github.com/manilarome/lightdm-webkit2-theme-glorious/releases/download/v2.0.5/lightdm-webkit2-theme-glorious-2.0.5.tar.gz
+    # curl -L -o ../glorious.tar.gz https://github.com/manilarome/lightdm-webkit2-theme-glorious/releases/download/v2.0.5/lightdm-webkit2-theme-glorious-2.0.5.tar.gz
+    git clone akatsuki@192.168.0.101:/home/akatsuki/source/repos/archive/arch --depth=1
 }
 
 
@@ -70,14 +71,12 @@ function config_lightdm() {
     download_glorious
     # extract 
     mkdir ../glorious
-    tar -C ../glorious -xzvf ../glorious.tar.gz
+    tar -C ../glorious -xzf ../glorious.tar.gz
     # move
     sudo cp -r ../glorious /usr/share/lightdm-webkit/themes/glorious
     # clean
     rm -rf ../glorious  ../glorious.tar.gz
 
-    # set lightdm greeter session to webkit2
-    sudo bash -c "$FUNC; configline '.*greeter-session=.*' 'greeter-session=lightdm-webkit2-greeter' /etc/lightdm/lightdm.conf"
     sudo bash -c "$FUNC; configline 'webkit_theme.*' 'webkit_theme = glorious' /etc/lightdm/lightdm-webkit2-greeter.conf"
     sudo bash -c "$FUNC; configline 'debug_mode.*' 'debug_mode = true' /etc/lightdm/lightdm-webkit2-greeter.conf"
 }
