@@ -51,6 +51,11 @@ function set_resolution() {
     sudo bash -c "$FUNC; configline '.*display-setup-script=' 'display-setup-script=xrandr --output VGA-1 --mode 1920x1080' /etc/lightdm/lightdm.conf"
 }
 
+# set greeter to webkit2
+function set_greeter() {
+    sudo bash -c "$FUNC; configline '.*greeter-session=' 'greeter-session=lightdm-webkit2-greeter' /etc/lightdm/lightdm.conf"
+}
+
 
 # download glorious theme
 function download_glorious() {
@@ -97,6 +102,9 @@ function main() {
     elif [[ $1 == "enableLightdm" ]]
     then
         enable_lightdm
+    elif [[ $1 == "setGreeter" ]]
+    then
+        set_greeter
     elif [[ $1 == "populateDotfiles" ]]
     then
        populate_dotfiles 
