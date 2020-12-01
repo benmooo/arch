@@ -80,7 +80,7 @@ function set_greeter() {
 function download_glorious() {
     # download lightdm theme
     # curl -L -o ../glorious.tar.gz https://github.com/manilarome/lightdm-webkit2-theme-glorious/releases/download/v2.0.5/lightdm-webkit2-theme-glorious-2.0.5.tar.gz
-    scp akatsuki@192.168.0.101:/home/akatsuki/Downloads/lightdm* .
+    scp akatsuki@192.168.0.101:/home/akatsuki/Downloads/lightdm* ../glorious.tar.gz
 }
 
 
@@ -93,7 +93,7 @@ function set_greeter_theme() {
     download_glorious
     # extract 
     mkdir ../glorious
-    tar -C ../glorious -xzf ../glorious.tar.gz
+    tar -C ../glorious -xzvf ../glorious.tar.gz
     # move
     sudo cp -r ../glorious /usr/share/lightdm-webkit/themes/glorious
     # clean
