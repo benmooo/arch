@@ -61,6 +61,7 @@ function download_glorious() {
 
 # customize lightdm
 function config_lightdm() {
+    echo "Retriving glorious theme which is a webkit2-greeter theme for lightdm ..."
     download_glorious
     # extract 
     mkdir ../glorious
