@@ -120,6 +120,7 @@ function populate_dotfiles() {
 
 
 function main() {
+    set -x
     if [[ $1 == "chkPrerequisites" ]]
     then
         chk_prerequisites
@@ -154,6 +155,7 @@ function main() {
         set_resolution
         populate_dotfiles
     fi
+    { set +x; } 2>/dev/null
 }
 
 main $1 $2 $3
